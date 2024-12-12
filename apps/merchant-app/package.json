@@ -10,6 +10,7 @@
    },
    "dependencies": {
       "@repo/db": "*",
+      "@repo/store": "*",
       "@repo/ui": "*",
       "next": "15.0.4",
       "react": "^19.0.0",
@@ -17,6 +18,8 @@
       "recoil": "^0.7.7"
    },
    "devDependencies": {
+      "@repo/eslint-config": "*",
+      "@repo/typescript-config": "*",
       "@types/node": "^20",
       "@types/react": "^19",
       "@types/react-dom": "^19",

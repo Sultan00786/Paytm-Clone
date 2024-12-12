@@ -26,10 +26,9 @@ const prisma = new PrismaClient();
 
 export default function Home() {
    const session = useSession();
-   console.log(session.data?.user);
 
    return (
-      <div className=" text-3xl">
+      <div className="">
          <Appbar
             user={session.data?.user}
             onSignin={() => signIn()}
