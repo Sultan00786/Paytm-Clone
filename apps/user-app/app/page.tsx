@@ -1,41 +1,16 @@
-"use client";
-
-import { Button } from "@repo/ui/button";
 import { PrismaClient } from "@repo/db/clint";
-import BalanceShow from "./balanceShow";
-import { Appbar } from "@repo/ui/appBar";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 import { authOptions } from "../lib/auth";
 
 const prisma = new PrismaClient();
 
-// async function createUser() {
-//    prisma.user
-//       .create({
-//          data: {
-//             email: "terwefrf@gmail.com",
-//             password: "dsffafaEff",
-//          },
-//       })
-//       .then((e) => "Done to create user")
-//       .catch((e) => {
-//          console.log(e);
-//          return "Error aa gaya";
-//       });
-// }
+export default async function Home() {
+   const session = await getServerSession(authOptions);
 
-export default function Home() {
-   const session = useSession();
+   console.log(session);
 
-   return (
-      <div className="">
-         <Appbar
-            user={session.data?.user}
-            onSignin={() => signIn()}
-            onSignout={() => signOut()}
-         />
-         <BalanceShow />
-         <Button onclick={() => {}}>Click heree</Button>
-      </div>
-   );
+   if (session.user) {
+      redirect("/dashboard");
+   } else redirect("/api/auth/signin");
 }

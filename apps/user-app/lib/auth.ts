@@ -1,6 +1,7 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import { prisma } from "@repo/db/clint";
+import { constSelector } from "recoil";
 
 export const authOptions = {
    providers: [
@@ -30,7 +31,6 @@ export const authOptions = {
             });
 
             if (existingUser) {
-               console.log("User exists: ", existingUser);
                const passwordMatch = await bcrypt.compare(
                   credentials.password,
                   existingUser.password
@@ -78,7 +78,6 @@ export const authOptions = {
          return token;
       },
       async session({ token, session }: any) {
-         console.log(token.number);
          session.user.id = token.sub;
          session.user.number = token.number;
          return session;
