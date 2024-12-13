@@ -2,18 +2,13 @@ import { Session } from "node:inspector/promises";
 import { Button } from "./button";
 
 interface AppbarProps {
-   user?: {
-      id?: string;
-      email?: string | null;
-      name?: string | null;
-      number?: string;
-   };
+   isAuth: Boolean;
    // TODO: can u figure out what the type should be here?
    onSignin: () => void;
    onSignout: () => void;
 }
 export const Appbar = ({
-   user,
+   isAuth,
    onSignin,
    onSignout,
 }: AppbarProps) => {
@@ -23,8 +18,8 @@ export const Appbar = ({
             PayTM
          </div>
          <div className="flex flex-col justify-center pt-2">
-            <Button onclick={user ? onSignout : onSignin}>
-               {user ? "Logout" : "Login"}
+            <Button onclick={isAuth ? onSignout : onSignin}>
+               {isAuth ? "Logout" : "Login"}
             </Button>
          </div>
       </div>
