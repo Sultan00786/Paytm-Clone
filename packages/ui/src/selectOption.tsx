@@ -6,19 +6,16 @@ interface PropType {
       name: string;
       redirect: string;
    }[];
+   funcSelect: (e: HTMLSelectElement["value"]) => void;
 }
 
-function Select({ setRedirect, options }: PropType) {
+function Select({ options, funcSelect }: PropType) {
    return (
       <div>
          <select
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             onChange={(e) => {
-               setRedirect(
-                  options.find(
-                     (bank) => bank.name === e.target.value
-                  )?.redirect || ""
-               );
+               funcSelect(e.target.value);
             }}
          >
             {options.map((bank, index) => {
