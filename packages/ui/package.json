@@ -9,6 +9,7 @@
       "./code": "./src/code.tsx",
       "./dashboardHeading": "./src/dashboardHeading.tsx",
       "./textInput": "./src/textInput.tsx",
+      "./loading": "./src/loading.tsx",
       "./selectOption": "./src/selectOption.tsx"
    },
    "scripts": {

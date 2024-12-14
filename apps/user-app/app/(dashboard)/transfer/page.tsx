@@ -5,6 +5,7 @@ import TransactionsListCard from "../../../components/TransactionsListCard";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../../lib/auth";
 import { prisma } from "@repo/db/clint";
+import Loader from "@repo/ui/loading";
 
 const getAmount = async (userId: string) => {
    const id = Number(userId);
@@ -52,7 +53,7 @@ export default async function Transfer() {
          <DashboardHeading title="Transfer" />
          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 p-4 mt-4">
             <AddMoneyBox />
-            <div className="flex flex-col gap-4" >
+            <div className="flex flex-col gap-4">
                <BalanceCard
                   amount={balance.amount}
                   locked={balance.locked}

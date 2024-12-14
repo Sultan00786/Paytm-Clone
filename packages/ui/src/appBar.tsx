@@ -14,7 +14,7 @@ export const Appbar = ({
 }: AppbarProps) => {
    return (
       <div className="flex justify-between border-b px-4">
-         <div className="text-lg flex flex-col justify-center">
+         <div className=" text-xl flex flex-col justify-center">
             PayTM
          </div>
          <div className="flex flex-col justify-center pt-2">
