@@ -10,7 +10,8 @@
       "./dashboardHeading": "./src/dashboardHeading.tsx",
       "./textInput": "./src/textInput.tsx",
       "./loading": "./src/loading.tsx",
-      "./selectOption": "./src/selectOption.tsx"
+      "./selectOption": "./src/selectOption.tsx",
+      "./toast": "./lib/toast.ts"
    },
    "scripts": {
       "lint": "eslint . --max-warnings 0",
@@ -29,6 +30,7 @@
       "typescript": "5.5.4"
    },
    "dependencies": {
-      "react": "^18.2.0"
+      "react": "^18.2.0",
+      "react-hot-toast": "^2.4.1"
    }
 }

@@ -40,7 +40,7 @@ export default function AddMoneyBox() {
                   setAmount(Number(e));
                }}
             />
-            <div>
+            <div className="mt-3">
                <h3>Bank</h3>
 
                {/* critiacal component !!!! */}
@@ -62,10 +62,10 @@ export default function AddMoneyBox() {
                      onclick={async () => {
                         // window.location.href = redirectUrl || "";
                         const respones =
-                        await creatOnRampTransaction(
-                           amount,
-                           provider
-                        );
+                           await creatOnRampTransaction(
+                              amount,
+                              provider
+                           );
                         router.push(redirectUrl || "");
                         console.log(respones);
                      }}

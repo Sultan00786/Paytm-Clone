@@ -29,10 +29,9 @@ const getAmount = async (userId: string) => {
 async function getOnRampTransactions(userId: string) {
    const txns = await prisma.onRampTransaction.findMany({
       where: {
-         userId: 2,
+         userId: Number(userId),
       },
       orderBy: { startTime: "desc" },
-      take: 3,
    });
    return txns.map((t) => ({
       time: t.startTime,
