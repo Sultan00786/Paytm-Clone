@@ -6,6 +6,7 @@ import Select from "@repo/ui/selectOption";
 import { TextInput } from "@repo/ui/textInput";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import creatOnRampTransaction from "../app/lib/actions/creatOnRampTransaction";
 
 const SUPPORTED_BANK = [
    {
@@ -22,6 +23,10 @@ export default function AddMoneyBox() {
    const [redirectUrl, setRedirect] = useState(
       SUPPORTED_BANK[0]?.redirect
    );
+   const [amount, setAmount] = useState(0);
+   const [provider, setProvider] = useState(
+      SUPPORTED_BANK[0]?.name || ""
+   );
 
    const router = useRouter();
 
@@ -31,19 +36,38 @@ export default function AddMoneyBox() {
             <TextInput
                label="Amount"
                placeholder="Enter amount"
-               onChange={() => {}}
+               onChange={(e) => {
+                  setAmount(Number(e));
+               }}
             />
-            <div>
+            <div className="mt-3">
                <h3>Bank</h3>
+
+               {/* critiacal component !!!! */}
                <Select
                   setRedirect={setRedirect}
                   options={SUPPORTED_BANK}
+                  funcSelect={(e) => {
+                     setProvider(e || "");
+                     setRedirect(
+                        SUPPORTED_BANK.find(
+                           (bank) => bank.name === e
+                        )?.redirect || ""
+                     );
+                  }}
                />
+
                <div className="flex justify-center pt-4">
                   <Button
-                     onclick={() => {
+                     onclick={async () => {
                         // window.location.href = redirectUrl || "";
+                        const respones =
+                           await creatOnRampTransaction(
+                              amount,
+                              provider
+                           );
                         router.push(redirectUrl || "");
+                        console.log(respones);
                      }}
                   >
                      Add Money

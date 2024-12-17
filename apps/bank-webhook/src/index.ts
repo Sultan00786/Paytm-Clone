@@ -21,10 +21,23 @@ app.post("/bankwebhook", async (req, res) => {
       amount: req.body.amount,
    };
 
+   const transaction = await prisma.onRampTransaction.findFirst({
+      where: {
+         token: paymentInfo.token,
+      },
+   });
+
+   if (transaction?.status !== "Processing") {
+      res.json({
+         success: false,
+         message: "Payment already Processesed !!",
+      });
+   }
+
    try {
       const transactionResult = await prisma.$transaction([
          // update balance amt or increate amt
-         prisma.balance.updateMany({
+         prisma.balance.update({
             where: {
                userId: Number(paymentInfo.userId),
             },
@@ -36,7 +49,7 @@ app.post("/bankwebhook", async (req, res) => {
          }),
 
          //  and also update transciption status
-         prisma.onRampTransaction.updateMany({
+         prisma.onRampTransaction.update({
             where: {
                token: paymentInfo.token,
             },

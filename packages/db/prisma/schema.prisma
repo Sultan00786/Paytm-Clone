@@ -21,6 +21,11 @@ model User {
   password          String
   OnRampTransaction OnRampTransaction[]
   Balance           Balance[]
+
+  // money send to which user
+  sendTransfer      P2pTransaction[]    @relation(name: "ToUserRelation")
+  // money recieve from which user
+  reciveTranfer     P2pTransaction[]    @relation(name: "FromUserRelation")
 }
 
  // here userid is --> not unique bacause relation ship between user and transaction is --> One to Many
@@ -42,6 +47,16 @@ model Balance {
   amount        Int 
   locked        Int
   user          User        @relation(fields: [userId], references: [id])
+}
+
+model P2pTransaction {
+  id          Int         @id @default(autoincrement()) 
+  amount      Int
+  timeStamp   DateTime    
+  fromUserId  Int
+  fromUser    User         @relation(name: "FromUserRelation", fields: [fromUserId], references: [id])
+  toUserId    Int
+  toUser      User         @relation(name: "ToUserRelation", fields: [toUserId], references: [id])
 }
 
 model Merchant {
